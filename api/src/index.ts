@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 /* use router */
-app.use(router);
+app.use("/tasks", router);
 
 /* start listening */
 app.listen(port, () => {
