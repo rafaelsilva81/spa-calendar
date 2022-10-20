@@ -26,6 +26,28 @@ export default {
     });
   },
 
+  getTaskByDate: async (
+    startDate: string,
+    endDate: string
+  ): Promise<Task[] | null> => {
+    return await prisma.task.findMany({
+      where: {
+        AND: [
+          {
+            start: {
+              gte: startDate,
+            },
+          },
+          {
+            end: {
+              lte: endDate,
+            },
+          },
+        ],
+      },
+    });
+  },
+
   createTask: async (
     title: string,
     description: string,
