@@ -28,6 +28,16 @@ export const getTaskByTitle = async (req: Request, res: Response) => {
   }
 };
 
+export const getTaskByDate = async (req: Request, res: Response) => {
+  try {
+    const { startDate, endDate } = req.body;
+    const tasks = await taskService.getTaskByDate(startDate, endDate);
+    res.status(200).json(tasks);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const newTask = async (req: Request, res: Response) => {
   try {
     const task = await taskService.createTask(
