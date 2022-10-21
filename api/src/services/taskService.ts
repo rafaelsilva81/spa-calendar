@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { Task } from "@prisma/client";
+import dayjs from "dayjs";
 
 const prisma = new PrismaClient();
 
@@ -28,22 +29,19 @@ export default {
 
   getTaskByDate: async (
     startDate: string,
-    endDate: string
+    mode: "day" | "week" | "month"
   ): Promise<Task[] | null> => {
+    const start = dayjs(startDate);
+    const end = start.add(1, mode);
+    console.log(start.format("YYYY-MM-DD HH:mm:ss"));
+    console.log(end.format("YYYY-MM-DD HH:mm:ss"));
+
     return await prisma.task.findMany({
       where: {
-        AND: [
-          {
-            start: {
-              gte: startDate,
-            },
-          },
-          {
-            end: {
-              lte: endDate,
-            },
-          },
-        ],
+        start: {
+          gte: dayjs(startDate).startOf(mode).toDate(),
+          lte: dayjs(startDate).endOf(mode).toDate(),
+        },
       },
     });
   },

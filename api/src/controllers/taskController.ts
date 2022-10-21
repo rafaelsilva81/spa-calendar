@@ -29,9 +29,13 @@ export const getTaskByTitle = async (req: Request, res: Response) => {
 };
 
 export const getTaskByDate = async (req: Request, res: Response) => {
+  const { mode, startDate } = req.params;
+  if (mode != "day" && mode != "week" && mode != "month") {
+    res.status(400).json({ message: "Invalid mode" });
+    return;
+  }
   try {
-    const { startDate, endDate } = req.body;
-    const tasks = await taskService.getTaskByDate(startDate, endDate);
+    const tasks = await taskService.getTaskByDate(startDate, mode);
     res.status(200).json(tasks);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
