@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Calendar } from "./components/Calendar";
+import { Calendar } from "./pages/Calendar";
 import { Navbar } from "./components/Navbar";
 import * as dayjs from "dayjs";
 import ptbr from "dayjs/locale/pt-br";
