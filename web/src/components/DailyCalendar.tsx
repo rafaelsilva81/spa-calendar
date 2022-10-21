@@ -11,7 +11,8 @@ export const DailyCalendar = (props: { events: TaskDTO[] }) => {
   });
 
   return (
-    <>
+    
+    <div>
       <div className="flex flex-col h-full">
         {hours.map((hour) => {
           return (
@@ -55,6 +56,6 @@ export const DailyCalendar = (props: { events: TaskDTO[] }) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };

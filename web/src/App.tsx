@@ -7,7 +7,7 @@ import ptbr from "dayjs/locale/pt-br";
 function App() {
   dayjs.locale(ptbr);
 
-  const [mode, setMode] = useState<string>("day");
+  const [mode, setMode] = useState<string>('day');
 
   return (
     <div>

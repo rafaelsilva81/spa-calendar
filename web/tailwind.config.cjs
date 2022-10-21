@@ -15,7 +15,10 @@ module.exports = {
         primary: colors.violet,
         secondary: colors.gray,
       }
-    }
+    },
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+    },
   },
   plugins: [],
 }
