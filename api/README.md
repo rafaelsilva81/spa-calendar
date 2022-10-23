@@ -139,9 +139,8 @@ Cria uma nova tarefa.
 
 #### Exemplo de resposta 
 
-```http
+```
 HTTP/1.1 200 OK
-Content-Type: application/json
 ```
 ### `PUT /tasks/:id`
 
@@ -183,6 +182,6 @@ Deleta uma tarefa específica.
 
 #### Exemplo de resposta
 
-```http
+```
 HTTP/1.1 200 OK
 ```
