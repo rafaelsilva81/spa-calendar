@@ -20,7 +20,7 @@ export const WeeklyCalendar = (props: IWeeklyCalendarProps) => {
     ...new Set(
       events.map((event) => {
         return dayjs(event.start).date();
-      })
+      }),
     ),
   ];
 
@@ -33,19 +33,21 @@ export const WeeklyCalendar = (props: IWeeklyCalendarProps) => {
         });
 
         return (
-          <div
-            key={'day' + i}
-            className='flex flex-row mb-3 mt-1'>
+          <div key={'day' + i} className='flex flex-row mb-3 mt-1'>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className='flex justify-center mr-1 md:mr-2 items-start'>
+              className='flex justify-center mr-1 md:mr-2 items-start'
+            >
               <div className='flex flex-col items-center bg-neutral-200 p-2 rounded-lg'>
                 <span className='font-bold text-sm md:text-lg'>
                   {dayjs(currentDay).format('DD/MM')}
                 </span>
-                <span className='text-xs md:text-md'> {dayjs(currentDay).format('ddd')} </span>
+                <span className='text-xs md:text-md'>
+                  {' '}
+                  {dayjs(currentDay).format('ddd')}{' '}
+                </span>
               </div>
             </motion.div>
 

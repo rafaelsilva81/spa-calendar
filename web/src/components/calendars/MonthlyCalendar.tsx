@@ -33,11 +33,13 @@ export const MonthlyCalendar = (props: IMonthViewProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
-        className='grid grid-cols-7 gap-1 w-full h-full'>
+        className='grid grid-cols-7 gap-1 w-full h-full'
+      >
         {daysOfWeek.map((day, i) => (
           <div
             key={'day' + i}
-            className='flex items-center justify-center w-full text-sm font-bold text-neutral-100 bg-primary-500 h-10 col-span-1'>
+            className='flex items-center justify-center w-full text-sm font-bold text-neutral-100 bg-primary-500 h-10 col-span-1'
+          >
             {day}
           </div>
         ))}
@@ -48,7 +50,8 @@ export const MonthlyCalendar = (props: IMonthViewProps) => {
           /* Se o primeiro dia do mes for domingo (0), Nenhum quadrado é gerado */
           <div
             key={'emptyBeginning' + i}
-            className='flex items-center justify-center text-sm font-bold text-neutral-500 bg-neutral-200 w-full h-10 col-span-1'>
+            className='flex items-center justify-center text-sm font-bold text-neutral-500 bg-neutral-200 w-full h-10 col-span-1'
+          >
             {''}
           </div>
         ))}
@@ -58,12 +61,15 @@ export const MonthlyCalendar = (props: IMonthViewProps) => {
           <div
             key={'day' + i}
             onClick={() => {
-              setSelectedDate(dayjs(selectedDate).startOf('month').add(i, 'day'));
+              setSelectedDate(
+                dayjs(selectedDate).startOf('month').add(i, 'day'),
+              );
               setMode('day');
             }}
             className='cursor-pointer 
             flex items-center justify-center text-sm font-bold text-neutral-500
-            bg-neutral-200 w-full h-10 col-span-1 hover:bg-neutral-300'>
+            bg-neutral-200 w-full h-10 col-span-1 hover:bg-neutral-300'
+          >
             <span className='mr-1'>{i + 1}</span>
             {daysWithEvents.includes(i + 1) && (
               /* Contar quantidade de vezes que o valor aparece */
@@ -81,7 +87,8 @@ export const MonthlyCalendar = (props: IMonthViewProps) => {
           /* Exemplo: se o ultimo dia do mes for quinta (4), 2 quadrados em branco sao gerados */
           <div
             key={'emptyEnd' + i}
-            className='flex items-center justify-center text-sm font-bold text-neutral-500 bg-neutral-200 w-full h-10 col-span-1'></div>
+            className='flex items-center justify-center text-sm font-bold text-neutral-500 bg-neutral-200 w-full h-10 col-span-1'
+          ></div>
         ))}
       </motion.div>
     </div>

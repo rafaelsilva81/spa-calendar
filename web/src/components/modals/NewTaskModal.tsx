@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { ITaskDTO } from '../../dto/Task';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaTimes } from 'react-icons/fa';
@@ -8,6 +8,8 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import * as yup from 'yup';
+import { DatePickerHeader } from '../utils/DatePickerHeader';
+import DatePicker from 'react-datepicker';
 
 interface INewTaskModalProps {
   onCreate: (task: ITaskDTO) => Promise<void>;
@@ -42,6 +44,7 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     setError,
   } = useForm<FormInputs>({
@@ -81,7 +84,7 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
       .set('minute', dayjs(start, 'HH:mm').minute())
       .toISOString();
 
-    console.log(durationMinutes);
+    /* console.log(durationMinutes); */
     const newTask = {
       title,
       description,
@@ -100,16 +103,20 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.2 }}
-          className='relative my-6 mx-auto w-full p-2 md:p-0 md:w-1/3'>
+          className='relative my-6 mx-auto w-full p-2 md:p-0 md:w-1/3'
+        >
           {/*content*/}
           <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
             {/*header*/}
             <div className='flex items-start justify-between p-2 bg-neutral-200 rounded-t'>
-              <span className='text-lg font-semibold tex-neutral-800 ml-3'>Nova tarefa</span>
+              <span className='text-lg font-semibold tex-neutral-800 ml-3'>
+                Nova tarefa
+              </span>
               <button
                 className='text-neutral-800 opacity-75 text-xl mr-3 font-semibold rounded-full bg-transparent hover:bg-neutral-300 p-1
                 active:text-primary-600'
-                onClick={onClose}>
+                onClick={onClose}
+              >
                 <FaTimes />
               </button>
             </div>
@@ -125,30 +132,47 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
                     placeholder='Título da tarefa'
                   />
                   {errors.title && (
-                    <span className='text-red-500 text-sm mt-1'>{errors.title.message}</span>
+                    <span className='text-red-500 text-sm mt-1'>
+                      {errors.title.message}
+                    </span>
                   )}
                 </div>
 
                 <div className='flex flex-wrap w-full mt-4'>
                   <input
                     {...register('description')}
-                    className='shadow border text-sm rounded-md w-full p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
+                    className='shadow border rounded-md w-full p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
+                    type='text'
                     placeholder='Descrição da tarefa'
                   />
                   {errors.description && (
-                    <span className='text-red-500 text-sm mt-1'>{errors.description.message}</span>
+                    <span className='text-red-500 text-sm mt-1'>
+                      {errors.description.message}
+                    </span>
                   )}
                 </div>
 
                 <div className='flex flex-wrap mt-4'>
-                  <input
-                    {...register('day')}
-                    className='shadow border text-sm rounded-md w-full p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
-                    type='date'
-                    placeholder='Data'
+                  <Controller
+                    name='day'
+                    control={control}
+                    render={({ field }) => (
+                      <DatePicker
+                        placeholderText='Select date'
+                        onChange={(date) => field.onChange(date)}
+                        selected={dayjs(field.value).toDate()}
+                        dateFormat='dd/MM/yyyy'
+                        renderCustomHeader={(props) => (
+                          <DatePickerHeader {...props} />
+                        )}
+                      />
+                    )}
                   />
+
                   {errors.day && (
-                    <span className='text-red-500 text-sm mt-1'>{errors.day.message}</span>
+                    <span className='text-red-500 text-sm mt-1'>
+                      {errors.day.message}
+                    </span>
                   )}
                 </div>
 
@@ -162,7 +186,9 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
                     />
                   </div>
                   <div className='flex w-6 items-center justify-center'>
-                    <span className='text-sm text-neutral-800 font-bold'>–</span>
+                    <span className='text-sm text-neutral-800 font-bold'>
+                      –
+                    </span>
                   </div>
 
                   <div className='flex flex-auto'>
@@ -177,10 +203,14 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
 
                 <div className='flex flex-col flex-auto'>
                   {errors.start && (
-                    <span className='text-red-500 text-sm mt-1'>{errors.start.message}</span>
+                    <span className='text-red-500 text-sm mt-1'>
+                      {errors.start.message}
+                    </span>
                   )}
                   {errors.end && (
-                    <span className='text-red-500 text-sm mt-1'>{errors.end.message}</span>
+                    <span className='text-red-500 text-sm mt-1'>
+                      {errors.end.message}
+                    </span>
                   )}
                 </div>
               </div>
@@ -196,7 +226,8 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
                                             disabled:opacity-50'
                   type='button'
                   disabled={loading}
-                  onClick={() => onClose()}>
+                  onClick={() => onClose()}
+                >
                   Cancelar
                 </button>
                 <button
@@ -207,7 +238,8 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
                                             focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150
                                             disabled:opacity-50'
                   type='submit'
-                  disabled={loading}>
+                  disabled={loading}
+                >
                   Criar tarefa
                 </button>
                 {loading ? (

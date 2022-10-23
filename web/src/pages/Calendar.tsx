@@ -2,9 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as dayjs from 'dayjs';
 import { ITaskDTO, TaskDTO } from '../dto/Task';
 import api from '../services/api';
-import { Navbar, CalendarHeader, DailyTaskCard } from '../components/common';
+import { Navbar, DailyTaskCard } from '../components/common';
 import { EditTaskModal, NewTaskModal } from '../components/modals';
-import { DailyCalendar, WeeklyCalendar, MonthlyCalendar } from '../components/calendars';
+import {
+  DailyCalendar,
+  WeeklyCalendar,
+  MonthlyCalendar,
+} from '../components/calendars';
+import { CalendarHeader } from '../components/utils/CalendarHeader';
 
 export const Calendar = () => {
   const [mode, setMode] = useState<'day' | 'week' | 'month'>('day');
@@ -20,7 +25,7 @@ export const Calendar = () => {
 
   const [search, setSearch] = useState<string | undefined>();
 
-  console.log('Selected  date: ' + selectedDate.format('DD/MM/YYYY'));
+  /* console.log('Selected  date: ' + selectedDate.format('DD/MM/YYYY')); */
 
   useEffect(() => {
     if (search) {
@@ -47,7 +52,7 @@ export const Calendar = () => {
           setEvents(data);
         })
         .catch((error) => {
-          console.log(error.response);
+          error.response;
         });
     }
   };
@@ -66,9 +71,8 @@ export const Calendar = () => {
   };
 
   const handleDelete = async (id: string) => {
-    /* pedir confirmação do usuario */
     /* TODO: janelinha mais bonita */
-    if (window.confirm('Tem certeza que deseja excluir essa tarefa?')) {
+    if (window.confirm('Tem certeza que deseja excluir essa tarefa? \n Essa ação não pode ser desfeita')) {
       api
         .delete(`/${id}`)
         .then(() => {
@@ -106,9 +110,7 @@ export const Calendar = () => {
         search={search}
       />
 
-      <div
-        id='calendar'
-        className='p-4 md:p-8 mx-1 md:mx-14'>
+      <div id='calendar' className='p-4 md:p-8 mx-1 md:mx-14'>
         <div className='flex flex-col'>
           {search ? (
             events.length === 0 ? (
@@ -118,17 +120,21 @@ export const Calendar = () => {
                 </h1>
                 <button
                   className='bg-primary-600 hover:bg-primary-500 active:bg-primary-500 text-white font-bold py-2 px-4 rounded'
-                  onClick={() => setSearch(undefined)}>
+                  onClick={() => setSearch(undefined)}
+                >
                   Limpar pesquisa
                 </button>
               </div>
             ) : (
               <div className='flex flex-col'>
                 <div className='flex justify-between mb-2 items-center'>
-                  <h1 className='text-center md:text-xl text-lg font-bold'>Tarefas encontradas</h1>
+                  <h1 className='text-center md:text-xl text-lg font-bold'>
+                    Tarefas encontradas
+                  </h1>
                   <button
                     className='bg-primary-600 hover:bg-primary-500 active:bg-primary-500 text-white font-bold py-1 px-2 rounded'
-                    onClick={() => setSearch(undefined)}>
+                    onClick={() => setSearch(undefined)}
+                  >
                     <span className='hidden md:flex'>Limpar pesquisa</span>
                     <span className='flex md:hidden text-sm'>Limpar</span>
                   </button>

@@ -9,15 +9,18 @@ module.exports = {
     "./index.html",
     "./src/**/*.{ts,tsx}",
   ],
+  darkMode: false,
   theme: {
     extend: {
       colors: {
-        primary: colors.indigo,
+        primary: colors.violet,
       }
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")({
+    strategy: 'class',
+  })],
 }

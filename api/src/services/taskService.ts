@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-import { Task } from "@prisma/client";
-import dayjs from "dayjs";
+import { PrismaClient } from '@prisma/client';
+import { Task } from '@prisma/client';
+import dayjs from 'dayjs';
 
 const prisma = new PrismaClient();
 
@@ -29,43 +29,55 @@ export default {
 
   getTaskByDate: async (
     startDate: string,
-    mode: "day" | "week" | "month"
+    mode: 'day' | 'week' | 'month'
   ): Promise<Task[] | null> => {
     const start = dayjs(startDate);
     const end = start.add(1, mode);
 
-    return await prisma.task.findMany({
-      where: {
-        start: {
-          gte: dayjs(startDate).startOf(mode).toDate(),
-          lte: dayjs(startDate).endOf(mode).toDate(),
+    if (mode === 'week') {
+      // Caso especial, pois a busca por semana é na verdade a busca dos proximos 7 dias (dependendo do dia selecionado)
+      return await prisma.task.findMany({
+        where: {
+          start: {
+            gte: dayjs(startDate).startOf('day').toDate(), // Primeiro dia da semana selecionada
+            lte: dayjs(startDate).add(7, 'days').endOf('day').toDate(), //Somar 7 dias
+          },
         },
-      },
-      orderBy: {
-        start : "asc"
-      },
-    });
+        orderBy: {
+          start: 'asc',
+        },
+      });
+    } else {
+      return await prisma.task.findMany({
+        where: {
+          start: {
+            gte: dayjs(startDate).startOf(mode).toDate(),
+            lte: dayjs(startDate).endOf(mode).toDate(),
+          },
+        },
+        orderBy: {
+          start: 'asc',
+        },
+      });
+    }
   },
 
-  createTask: async (
-    title: string,
-    description: string,
-    start: Date,
-    durationMinutes: number
-  ) => {
-    await prisma.task.create({
-      data: {
-        title,
-        description,
-        start,
-        durationMinutes,
-      },
-    }).then((task) => {
-      return task;
-    }
-    ).catch((error) => {
-      throw error;
-    });
+  createTask: async (title: string, description: string, start: Date, durationMinutes: number) => {
+    await prisma.task
+      .create({
+        data: {
+          title,
+          description,
+          start,
+          durationMinutes,
+        },
+      })
+      .then((task) => {
+        return task;
+      })
+      .catch((error) => {
+        throw error;
+      });
   },
 
   updateTask: async (

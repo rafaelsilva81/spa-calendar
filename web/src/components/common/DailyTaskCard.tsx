@@ -33,14 +33,18 @@ export const DailyTaskCard = (props: IDailyTaskCardProps) => {
       animate={{ x: 0, opacity: 1 }}
       /* Animation on hover */
       className='flex w-full cursor-pointer'
-      key={task.id}>
+      key={task.id}
+    >
       {/* Event card */}
       <div
         className='flex flex-col flex-auto shadow rounded-lg bg-primary-600 mb-2 h-20 justify-center hover:bg-primary-500'
-        onClick={showDetails}>
+        onClick={showDetails}
+      >
         <div className='flex flex-col mx-4 md:mx-8'>
           <div className='flex flex-col md:flex-row justify-between w-full md:items-center'>
-            <h1 className='text-sm md:text-xl font-semibold text-neutral-100'>{task.title}</h1>
+            <h1 className='text-sm md:text-xl font-semibold text-neutral-100'>
+              {task.title}
+            </h1>
             <h1 className='text-sm md:text-xl font-semibold flex items-center text-neutral-100'>
               <FaClock className='text-xs' />
               <span className='ml-1'>
@@ -66,13 +70,15 @@ export const DailyTaskCard = (props: IDailyTaskCardProps) => {
         }}
         id='details'
         className='hidden'
-        ref={eventDetails}>
+        ref={eventDetails}
+      >
         {/* Edit card */}
         <div
           className='flex flex-col p-4 md:p-6 bg-yellow-500 hover:opacity-75 active:opacity-100 mb-1 h-20 justify-center flex-none rounded-l-lg ml-1 active:bg-yellow-400'
           onClick={() => {
             onEdit();
-          }}>
+          }}
+        >
           <div className='flex flex-row justify-between'>
             <h1 className='text-lg md:text-2xl font-semibold text-neutral-100 flex flex-col items-center'>
               <FaPenSquare />
@@ -86,7 +92,8 @@ export const DailyTaskCard = (props: IDailyTaskCardProps) => {
           className='flex flex-col p-4 md:p-6 bg-red-500 hover:opacity-75 active:opacity-100 mb-1 h-20 justify-center flex-none rounded-r-lg active:bg-red-400'
           onClick={() => {
             onDelete(task.id);
-          }}>
+          }}
+        >
           <div className='flex flex-row justify-between'>
             <h1 className='text-lg md:text-2xl font-semibold text-neutral-100 flex flex-col items-center'>
               <FaTrash />
