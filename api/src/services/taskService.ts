@@ -33,8 +33,6 @@ export default {
   ): Promise<Task[] | null> => {
     const start = dayjs(startDate);
     const end = start.add(1, mode);
-    console.log(start.format("YYYY-MM-DD HH:mm:ss"));
-    console.log(end.format("YYYY-MM-DD HH:mm:ss"));
 
     return await prisma.task.findMany({
       where: {
@@ -43,6 +41,9 @@ export default {
           lte: dayjs(startDate).endOf(mode).toDate(),
         },
       },
+      orderBy: {
+        start : "asc"
+      },
     });
   },
 
@@ -50,15 +51,20 @@ export default {
     title: string,
     description: string,
     start: Date,
-    end: Date
-  ): Promise<Task> => {
-    return await prisma.task.create({
+    durationMinutes: number
+  ) => {
+    await prisma.task.create({
       data: {
         title,
         description,
         start,
-        end,
+        durationMinutes,
       },
+    }).then((task) => {
+      return task;
+    }
+    ).catch((error) => {
+      throw error;
     });
   },
 
@@ -67,7 +73,7 @@ export default {
     title: string,
     description: string,
     start: Date,
-    end: Date
+    durationMinutes: number
   ): Promise<Task> => {
     return await prisma.task.update({
       where: {
@@ -77,7 +83,7 @@ export default {
         title,
         description,
         start,
-        end,
+        durationMinutes,
       },
     });
   },

@@ -48,7 +48,7 @@ export const newTask = async (req: Request, res: Response) => {
       req.body.title,
       req.body.description,
       req.body.start,
-      req.body.end
+      req.body.durationMinutes
     );
     res.status(201).json(task);
   } catch (error: any) {
@@ -63,7 +63,7 @@ export const updateTask = async (req: Request, res: Response) => {
       req.body.title,
       req.body.description,
       req.body.start,
-      req.body.end
+      req.body.durationMinutes
     );
     res.status(200).json(task);
   } catch (error: any) {
