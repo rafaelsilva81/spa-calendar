@@ -8,60 +8,69 @@
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
-### Funcionalidades
+## Funcionalidades
 
 - [x] Criar, Editar, Remover tarefas
 - [x] Pesquisar por título
 - [x] Visualizar tarefas por Dia, mês ou ano
 
-### Como executar o projeto
-
-  
-### Clonar o repositório
-```bash
-git clone https://github.com/rafaelsilva81/spa-calendar
-```
+## Como executar
 
 ### Configurar back-end
 
-#### Entrar na pasta do projeto
+##### Entrar na pasta do back-end
 ```bash
 cd api
 ```
 
-#### Substituir o arquivo `/api/.env.example` por `/api/.env/`e preencha as variáveis de ambiente
+##### Substituir o arquivo `/api/.env.example` por `/api/.env/`e preencha as variáveis de ambiente
 ```bash
 cp .env.example .env
 ```
 
-#### Instalar dependências
+##### Instalar dependências
 ```bash
 npm install
 ```
 
-#### Executar o projeto
+##### Executar o projeto
 ```bash
 npm run dev
 ```
 
 ### Configurar front-end
 
-#### Entrar na pasta do projeto
+##### Entrar na pasta do front-end
 ```bash
 cd web
 ```
 
-#### Instalar dependências
+##### Instalar dependências
 ```bash
 npm install
 ```
 
-#### Executar o projeto
+##### Executar o projeto
 ```bash
 npm run start
 ```
 
-##### OBS: Sinta-se livre para separar as pastas do back-end e front-end em diretórios diferentes.
+> **OBS: Sinta-se livre para separar as pastas do back-end e front-end em diretórios diferentes.**
 
-### Documentação da API
-[Clique aqui para ver a documentação da API] (https://documenter.getpostman.com/view/15212765/Tz5qZQ9o)
+## Links Importantes
+### [Documentação da API](https://github.com/rafaelsilva81/spa-calendar/blob/main/api/README.md)
+
+## Imagens do projeto
+
+<p float='left'>
+<img  src="https://github.com/rafaelsilva81/spa-calendar/blob/main/resources/gif1.gif" w="50%"/>
+<img  src="https://github.com/rafaelsilva81/spa-calendar/blob/main/resources/gif2.gif" w="50%"/>
+</p>
+
+<p float='left'>
+<img  src="https://github.com/rafaelsilva81/spa-calendar/blob/main/resources/gif3.gif" w="50%"/>
+<img  src="https://github.com/rafaelsilva81/spa-calendar/blob/main/resources/gif4.gif" w="50%"/>
+</p>
+
+
+
