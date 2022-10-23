@@ -12,7 +12,7 @@
 
 - [x] Criar, Editar, Remover tarefas
 - [x] Pesquisar por título
-- [x] Visualizar tarefas por Dia, mês ou ano
+- [x] Visualizar tarefas por Dia, Semana ou Mês
 
 ## Como executar
 
