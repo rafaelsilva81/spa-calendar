@@ -10,7 +10,7 @@ interface IMonthViewProps {
   setMode: React.Dispatch<'day' | 'week' | 'month'>;
 }
 
-export const MonthView = (props: IMonthViewProps) => {
+export const MonthlyCalendar = (props: IMonthViewProps) => {
   const { selectedDate, setSelectedDate, setMode, events } = props;
 
   const daysInMonth = selectedDate.daysInMonth();

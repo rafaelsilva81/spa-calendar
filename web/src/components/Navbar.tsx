@@ -17,7 +17,9 @@ export const Navbar = (props: INavbarProps) => {
     <div
       id='navbar'
       className='flex justify-between p-2 h-14 items-center bg-neutral-200'>
-      <div className='ml-4 items-center text-primary-600 cursor-pointer hidden md:flex'>
+      <div
+        className='ml-4 items-center text-primary-600 cursor-pointer hidden md:flex'
+        onClick={() => setMode('day')}>
         <FaCalendarCheck size='24' />
         <h1 className='ml-2 text-xl'> MyCalendar </h1>
       </div>

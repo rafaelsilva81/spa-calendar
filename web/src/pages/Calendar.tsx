@@ -3,12 +3,12 @@ import * as dayjs from 'dayjs';
 import { ITaskDTO, TaskDTO } from '../dto/Task';
 import api from '../services/api';
 import { Navbar } from '../components/Navbar';
-import { FaRegCalendarAlt, FaCaretRight } from 'react-icons/fa';
-import { DailyTaskCard } from '../components/DailyTaskCard';
 import { NewTaskModal } from '../components/NewTaskModal';
 import { CalendarHeader } from '../components/CalendarHeader';
-import { MonthView } from '../components/MonthView';
+import { MonthlyCalendar } from '../components/MonthlyCalendar';
 import { EditTaskModal } from '../components/EditTaskModal';
+import { DailyCalendar } from '../components/DailyCalendar';
+import { WeeklyCalendar } from '../components/WeeklyCalendar';
 
 export const Calendar = () => {
   const [mode, setMode] = useState<'day' | 'week' | 'month'>('day');
@@ -22,9 +22,11 @@ export const Calendar = () => {
 
   const selectedTask = useRef<TaskDTO | undefined>(undefined);
 
+  console.log('Selected  date: ' + selectedDate.format('DD/MM/YYYY'));
+
   useEffect(() => {
     loadEvents();
-  }, [mode]);
+  }, [mode, selectedDate]);
 
   const loadEvents = async () => {
     api
@@ -52,6 +54,7 @@ export const Calendar = () => {
 
   const handleDelete = async (id: string) => {
     /* pedir confirmação do usuario */
+    /* TODO: janelinha mais bonita */
     if (window.confirm('Tem certeza que deseja excluir essa tarefa?')) {
       api
         .delete(`/${id}`)
@@ -95,30 +98,37 @@ export const Calendar = () => {
           <CalendarHeader
             mode={mode}
             selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
           />
 
           {/* Caso -> dia */}
           {mode === 'day' && (
-            <div className='flex flex-col'>
-              {events.map((event: TaskDTO) => {
-                return (
-                  <DailyTaskCard
-                    key={event.id}
-                    task={event}
-                    onDelete={handleDelete}
-                    onEdit={() => {
-                      selectedTask.current = event;
-                      setShowUpdateTask(true);
-                    }}
-                  />
-                );
-              })}
-            </div>
+            <DailyCalendar
+              events={events}
+              onDelete={handleDelete}
+              onEdit={(task) => {
+                selectedTask.current = task;
+                setShowUpdateTask(true);
+              }}
+            />
+          )}
+
+          {/* Caso -> Semana */}
+          {mode === 'week' && (
+            <WeeklyCalendar
+              selectedDate={selectedDate}
+              events={events}
+              onDelete={handleDelete}
+              onEdit={(task) => {
+                selectedTask.current = task;
+                setShowUpdateTask(true);
+              }}
+            />
           )}
 
           {/* Caso -> mes */}
           {mode === 'month' && (
-            <MonthView
+            <MonthlyCalendar
               events={events}
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
