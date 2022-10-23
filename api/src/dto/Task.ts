@@ -4,3 +4,5 @@ interface TaskDTO {
   start: Date | string;
   durationMinutes: number;
 }
+
+export { TaskDTO };
