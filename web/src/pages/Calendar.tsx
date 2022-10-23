@@ -2,13 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as dayjs from 'dayjs';
 import { ITaskDTO, TaskDTO } from '../dto/Task';
 import api from '../services/api';
-import { Navbar } from '../components/Navbar';
-import { NewTaskModal } from '../components/NewTaskModal';
-import { CalendarHeader } from '../components/CalendarHeader';
-import { MonthlyCalendar } from '../components/MonthlyCalendar';
-import { EditTaskModal } from '../components/EditTaskModal';
-import { DailyCalendar } from '../components/DailyCalendar';
-import { WeeklyCalendar } from '../components/WeeklyCalendar';
+import { Navbar, CalendarHeader } from '../components/common';
+import { EditTaskModal, NewTaskModal } from '../components/modals';
+import { DailyCalendar, WeeklyCalendar, MonthlyCalendar } from '../components/calendars';
 
 export const Calendar = () => {
   const [mode, setMode] = useState<'day' | 'week' | 'month'>('day');
@@ -93,7 +89,7 @@ export const Calendar = () => {
 
       <div
         id='calendar'
-        className='p-6 mx-0 md:mx-8'>
+        className='p-4 md:p-6 mx-0 md:mx-8'>
         <div className='flex flex-col'>
           <CalendarHeader
             mode={mode}

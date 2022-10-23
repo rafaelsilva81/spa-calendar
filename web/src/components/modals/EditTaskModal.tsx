@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { ITaskDTO, TaskDTO } from '../dto/Task';
+import { ITaskDTO, TaskDTO } from '../../dto/Task';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FaTimes } from 'react-icons/fa';
 import dayjs from 'dayjs';
@@ -9,9 +9,10 @@ import duration from 'dayjs/plugin/duration';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import * as yup from 'yup';
 
-interface INewTaskModalProps {
-  onCreate: (task: ITaskDTO) => Promise<void>;
+interface IEditTaskModalProps {
+  onUpdate: (id: string, task: ITaskDTO) => Promise<void>;
   onClose: () => void;
+  task: TaskDTO;
 }
 
 interface FormInputs {
@@ -31,11 +32,11 @@ const schema = yup.object().shape({
   end: yup.string().required('É necessário informar a hora de término'),
 });
 
-export const NewTaskModal = (props: INewTaskModalProps) => {
+export const EditTaskModal = (props: IEditTaskModalProps) => {
   dayjs.extend(duration);
   dayjs.extend(customParseFormat);
 
-  const { onClose, onCreate } = props;
+  const { onClose, onUpdate, task } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -47,11 +48,11 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
   } = useForm<FormInputs>({
     resolver: yupResolver(schema),
     defaultValues: {
-      title: '',
-      description: '',
-      day: dayjs().startOf('day').format('YYYY-MM-DD'),
-      start: dayjs().format('HH:mm'),
-      end: dayjs().add(1, 'hour').format('HH:mm'),
+      title: task.title,
+      description: task.description,
+      day: dayjs(task.start).format('YYYY-MM-DD'),
+      start: dayjs(task.start).format('HH:mm'),
+      end: dayjs(task.start).add(task.durationMinutes, 'minute').format('HH:mm'),
     },
   });
 
@@ -89,7 +90,7 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
       durationMinutes,
     };
 
-    await onCreate(newTask);
+    await onUpdate(task.id, newTask);
     setLoading(false);
   };
 
@@ -105,7 +106,7 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
           <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
             {/*header*/}
             <div className='flex items-start justify-between p-2 bg-neutral-200 rounded-t'>
-              <span className='text-lg font-semibold tex-neutral-800 ml-3'>Nova tarefa</span>
+              <span className='text-lg font-semibold tex-neutral-800 ml-3'>Editar tarefa</span>
               <button
                 className='text-neutral-800 opacity-75 text-xl mr-3 font-semibold rounded-full bg-transparent hover:bg-neutral-300 p-1
                 active:text-primary-600'
@@ -208,7 +209,7 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
                                             disabled:opacity-50'
                   type='submit'
                   disabled={loading}>
-                  Criar tarefa
+                  Confirmar edição
                 </button>
                 {loading ? (
                   <div className='animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900'></div>

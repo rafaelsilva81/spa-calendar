@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Calendar } from './pages/Calendar';
-import { Navbar } from './components/Navbar';
-import * as dayjs from 'dayjs';
+import React from 'react';
+import dayjs from 'dayjs';
 import ptbr from 'dayjs/locale/pt-br';
+import { Calendar } from './pages/Calendar';
 
 function App() {
   dayjs.locale(ptbr);

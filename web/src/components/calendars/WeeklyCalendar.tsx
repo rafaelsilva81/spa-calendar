@@ -1,7 +1,7 @@
 import dayjs, { Dayjs } from 'dayjs';
 import React from 'react';
-import { TaskDTO } from '../dto/Task';
-import { DailyTaskCard } from './DailyTaskCard';
+import { TaskDTO } from '../../dto/Task';
+import { DailyTaskCard } from '../common/DailyTaskCard';
 
 interface IWeeklyCalendarProps {
   selectedDate: Dayjs;
@@ -35,10 +35,12 @@ export const WeeklyCalendar = (props: IWeeklyCalendarProps) => {
           <div
             key={'day' + i}
             className='flex flex-row mb-3 mt-1'>
-            <div className='flex justify-center mr-2 items-start'>
+            <div className='flex justify-center mr-1 md:mr-2 items-start'>
               <div className='flex flex-col items-center bg-neutral-200 p-2 rounded-lg'>
-                <span className='font-bold'> {dayjs(currentDay).format('DD/MM')} </span>
-                <span className='text-sm'> {dayjs(currentDay).format('ddd')} </span>
+                <span className='font-bold text-sm md:text-lg'>
+                  {dayjs(currentDay).format('DD/MM')}
+                </span>
+                <span className='text-xs md:text-md'> {dayjs(currentDay).format('ddd')} </span>
               </div>
             </div>
 

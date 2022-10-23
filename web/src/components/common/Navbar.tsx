@@ -53,11 +53,11 @@ export const Navbar = (props: INavbarProps) => {
           </select>
         </div>
 
-        <div className='flex items-center justify-center'>
+        <div className='flex items-center justify-center flex-auto'>
           <button
             name='newEvent'
             id='newEvent'
-            className='ml-2 h-10 w-8 md:w-20 p-1 rounded-md bg-neutral-100  border-2 focus:border-primary-600'
+            className='ml-2 h-10 w-full p-2 rounded-md bg-neutral-100  border-2 focus:border-primary-600'
             onClick={() => setShowNewTask(true)}>
             <div className='flex items-center justify-center'>
               <span className='md:mr-1 text-xs'>

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { FaClock, FaPenSquare, FaTrash } from 'react-icons/fa';
-import { TaskDTO } from '../dto/Task';
+import { TaskDTO } from '../../dto/Task';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 

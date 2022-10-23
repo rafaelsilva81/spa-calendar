@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs';
-import { TaskDTO } from '../dto/Task';
+import { TaskDTO } from '../../dto/Task';
 import React from 'react';
 import { motion } from 'framer-motion';
 

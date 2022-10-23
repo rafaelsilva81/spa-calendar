@@ -1,6 +1,6 @@
 import React from 'react';
-import { TaskDTO } from '../dto/Task';
-import { DailyTaskCard } from './DailyTaskCard';
+import { TaskDTO } from '../../dto/Task';
+import { DailyTaskCard } from '../common/DailyTaskCard';
 
 interface IDailyCalendarProps {
   events: TaskDTO[];
