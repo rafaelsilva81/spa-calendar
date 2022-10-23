@@ -1,7 +1,6 @@
 interface TaskDTO {
-    title: string;
-    description: string;
-    tags: string[];
-    start: Date;
-    end: Date;
+  title: string;
+  description?: string;
+  start: Date | string;
+  durationMinutes: number;
 }

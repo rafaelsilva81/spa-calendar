@@ -31,9 +31,6 @@ export default {
     startDate: string,
     mode: 'day' | 'week' | 'month'
   ): Promise<Task[] | null> => {
-    const start = dayjs(startDate);
-    const end = start.add(1, mode);
-
     if (mode === 'week') {
       // Caso especial, pois a busca por semana é na verdade a busca dos proximos 7 dias (dependendo do dia selecionado)
       return await prisma.task.findMany({
@@ -62,7 +59,12 @@ export default {
     }
   },
 
-  createTask: async (title: string, description: string, start: Date, durationMinutes: number) => {
+  createTask: async (
+    title: string,
+    description: string,
+    start: Date,
+    durationMinutes: number
+  ) => {
     await prisma.task
       .create({
         data: {

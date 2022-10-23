@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import taskService from "../services/taskService";
+import { Request, Response } from 'express';
+import taskService from '../services/taskService';
 
 export const getTasks = async (req: Request, res: Response) => {
   try {
@@ -30,8 +30,8 @@ export const getTaskByTitle = async (req: Request, res: Response) => {
 
 export const getTaskByDate = async (req: Request, res: Response) => {
   const { mode, startDate } = req.params;
-  if (mode != "day" && mode != "week" && mode != "month") {
-    res.status(400).json({ message: "Invalid mode" });
+  if (mode != 'day' && mode != 'week' && mode != 'month') {
+    res.status(400).json({ message: 'Invalid mode' });
     return;
   }
   try {
