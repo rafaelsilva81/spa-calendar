@@ -1,7 +1,15 @@
 export type TaskDTO = {
-  _id: string;
+  id: string;
   title: string;
-  description: string;
+  description?: string;
   start: string;
-  end: string;
+  durationMinutes: number;
+};
+
+export type ITaskDTO = {
+  id?: string;
+  title: string;
+  description?: string;
+  start: string;
+  durationMinutes: number;
 };

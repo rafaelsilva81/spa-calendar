@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import { Calendar } from "./pages/Calendar";
-import { Navbar } from "./components/Navbar";
-import * as dayjs from "dayjs";
-import ptbr from "dayjs/locale/pt-br";
+import React, { useState } from 'react';
+import { Calendar } from './pages/Calendar';
+import { Navbar } from './components/Navbar';
+import * as dayjs from 'dayjs';
+import ptbr from 'dayjs/locale/pt-br';
 
 function App() {
   dayjs.locale(ptbr);
 
-  const [mode, setMode] = useState<string>('day');
-
   return (
     <div>
-      <Navbar setMode={setMode} />
-      <Calendar mode={mode} />
+      <Calendar />
     </div>
   );
 }
