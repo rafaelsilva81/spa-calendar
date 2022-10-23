@@ -158,6 +158,7 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
                     control={control}
                     render={({ field }) => (
                       <DatePicker
+                        className="cursor-pointer"
                         placeholderText='Select date'
                         onChange={(date) => field.onChange(date)}
                         selected={dayjs(field.value).toDate()}
@@ -180,7 +181,7 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
                   <div className='flex flex-auto'>
                     <input
                       {...register('start')}
-                      className='shadow border w-full text-sm rounded-md p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
+                      className='shadow cursor-text border w-full text-sm rounded-md p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
                       type='time'
                       placeholder='Início'
                     />
@@ -194,7 +195,7 @@ export const NewTaskModal = (props: INewTaskModalProps) => {
                   <div className='flex flex-auto'>
                     <input
                       {...register('end')}
-                      className='shadow border w-full text-sm rounded-md p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
+                      className='shadow cursor-text border w-full text-sm rounded-md p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
                       type='time'
                       placeholder='Fim'
                     />

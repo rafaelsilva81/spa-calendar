@@ -161,6 +161,7 @@ export const EditTaskModal = (props: IEditTaskModalProps) => {
                     render={({ field }) => (
                       <DatePicker
                         placeholderText='Select date'
+                        className="cursor-pointer"
                         onChange={(date) => field.onChange(date)}
                         selected={dayjs(field.value).toDate()}
                         dateFormat='dd/MM/yyyy'
@@ -181,7 +182,7 @@ export const EditTaskModal = (props: IEditTaskModalProps) => {
                   <div className='flex flex-auto'>
                     <input
                       {...register('start')}
-                      className='shadow border w-full text-sm rounded-md p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
+                      className='shadow cursor-text border w-full text-sm rounded-md p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
                       type='time'
                       placeholder='Início'
                     />
@@ -195,7 +196,7 @@ export const EditTaskModal = (props: IEditTaskModalProps) => {
                   <div className='flex flex-auto'>
                     <input
                       {...register('end')}
-                      className='shadow border w-full text-sm rounded-md p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
+                      className='shadow cursor-text border w-full text-sm rounded-md p-2 text-gray-700 focus:outline-none focus:outline-primary-500'
                       type='time'
                       placeholder='Fim'
                     />
