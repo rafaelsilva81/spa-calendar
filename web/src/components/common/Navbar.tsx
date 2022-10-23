@@ -5,9 +5,11 @@ interface INavbarProps {
   mode: 'day' | 'week' | 'month';
   setMode: Dispatch<'day' | 'week' | 'month'>;
   setShowNewTask: Dispatch<boolean>;
+  setSearch: Dispatch<string>;
+  search: string | undefined;
 }
 export const Navbar = (props: INavbarProps) => {
-  const { mode, setMode, setShowNewTask } = props;
+  const { mode, setMode, setShowNewTask, setSearch, search } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setMode(e.target.value as 'day' | 'week' | 'month');
@@ -16,7 +18,7 @@ export const Navbar = (props: INavbarProps) => {
   return (
     <div
       id='navbar'
-      className='flex justify-between p-2 h-14 items-center bg-neutral-200'>
+      className='flex justify-between p-2 h-14 items-center bg-neutral-200 md:px-14 md:py-6'>
       <div
         className='ml-4 items-center text-primary-600 cursor-pointer hidden md:flex'
         onClick={() => setMode('day')}>
@@ -26,11 +28,16 @@ export const Navbar = (props: INavbarProps) => {
 
       <div className='flex flex-auto flex-wrap mx-2 md:mx-10'>
         <div className='flex w-full wrap items-center'>
-          <FaSearch className='text-primary-600' />
+          <FaSearch
+            className='text-primary-600'
+            size={20}
+          />
           <input
-            className='ml-2 px-2 p-1 rounded-md w-full bg-neutral-100 border focus:outline-none focus:outline-primary-600'
+            className='ml-2 px-3 p-1 rounded-md w-full bg-neutral-100 border focus:outline-none focus:outline-primary-600'
             type='text'
-            placeholder='Pesquisar'
+            placeholder='Pesquisar por título'
+            value={search?.toString() || ''}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>

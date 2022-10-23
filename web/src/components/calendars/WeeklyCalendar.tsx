@@ -1,7 +1,8 @@
-import dayjs, { Dayjs } from 'dayjs';
 import React from 'react';
+import dayjs, { Dayjs } from 'dayjs';
 import { TaskDTO } from '../../dto/Task';
 import { DailyTaskCard } from '../common/DailyTaskCard';
+import { motion } from 'framer-motion';
 
 interface IWeeklyCalendarProps {
   selectedDate: Dayjs;
@@ -35,14 +36,18 @@ export const WeeklyCalendar = (props: IWeeklyCalendarProps) => {
           <div
             key={'day' + i}
             className='flex flex-row mb-3 mt-1'>
-            <div className='flex justify-center mr-1 md:mr-2 items-start'>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className='flex justify-center mr-1 md:mr-2 items-start'>
               <div className='flex flex-col items-center bg-neutral-200 p-2 rounded-lg'>
                 <span className='font-bold text-sm md:text-lg'>
                   {dayjs(currentDay).format('DD/MM')}
                 </span>
                 <span className='text-xs md:text-md'> {dayjs(currentDay).format('ddd')} </span>
               </div>
-            </div>
+            </motion.div>
 
             <div className='flex flex-col flex-auto items-center'>
               {eventsOnDay.map((event) => (
