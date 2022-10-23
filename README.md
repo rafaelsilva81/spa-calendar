@@ -52,7 +52,7 @@ npm install
 
 ##### Executar o projeto
 ```bash
-npm run start
+npm run dev
 ```
 
 > **OBS: Sinta-se livre para separar as pastas do back-end e front-end em diretórios diferentes.**
